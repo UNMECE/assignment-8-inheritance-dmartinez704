@@ -1,5 +1,5 @@
-#ifndef FEILDS_H
-#define FEILDS_H
+#ifndef FIELDS_H
+#define FIELDS_H
 
 #include <cstdio>
 #include <cmath>
@@ -42,6 +42,7 @@ return 0;
 
 class Electric: public Field{
 // Gauss Law: E(r) = Q / (4.0 * pi * r^2 * epsilon0 ) 
+private:
 double eField;
 public:
 //copy constructor
@@ -59,17 +60,23 @@ void compute_gauss(double Q, double r){
 
 double get_eField(){ return eField;}
 //overload operator +
-
-Electric_Field operator+(const Electric_Field& rhs) const{
-  Electric Field out(value[0] + rhs.value[0], value[1] + rhs.value[1], value[2] + rhs.value[2]);
-  
+Electric_Field operator+(const Electric_Field& rhs) const {
+  Electric_Field out(value[0] + rhs.value[0], value[1] + rhs.value[1], value[2] + rhs.value[2]);
+  return out;
 }
 //overload operator <<
+friend std::ostream& operator<<(std::ostream& os, const Electric_Field& e) {
+  os << "E = (" << e.value[0] << ", " << e.value[1] << ", " << e.value[2] << "), E =" << std::sqrt(e.value[0]*e.value[0] + 
+    e.value[1]*e.value[1] + e.value[2]*e.value[2]) << ", E_calc=" << e.eField;
+        return os;
+    }
+};
 //destructor
 return 0;
 };
 
 class Magnetic: public Field{
+private:
 double myField;
 public:
 //copy constructor
