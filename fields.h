@@ -66,8 +66,8 @@ Electric_Field operator+(const Electric_Field& rhs) const {
 }
 //overload operator <<
 friend std::ostream& operator<<(std::ostream& os, const Electric_Field& e) {
-  os << "E = (" << e.value[0] << ", " << e.value[1] << ", " << e.value[2] << "), E =" << std::sqrt(e.value[0]*e.value[0] + 
-    e.value[1]*e.value[1] + e.value[2]*e.value[2]) << ", E_calc=" << e.eField;
+  os << "E = (" << e.value[0] << ", " << e.value[1] << ", " << e.value[2] << "), |E| =" << std::sqrt(e.value[0]*e.value[0] + 
+    e.value[1]*e.value[1] + e.value[2]*e.value[2]) << ", Electric Field = " << e.eField;
         return os;
     }
 };
@@ -77,12 +77,40 @@ return 0;
 
 class Magnetic: public Field{
 private:
-double myField;
+double magField;
 public:
 //copy constructor
+Magnetic_Field() : Field(), magField(0.0) {}
+Magnetic_Field(double bx, double by, double bz) : Field(bx, by, bz), magField(0.0) {}
+
 //calculate magField()
+// Ampere's Law:  B = mu0 * I / (2*pi*r)
+void compute_from_ampere(double I, double r) {
+  const double mu0 = 4.0e-7 * M_PI;
+  if (r > 0.0) {
+      magField = (mu0 * I) / (2.0 * M_PI * r);
+        } else {
+            magField = 0.0;
+        }
+    }
+
+double get_magField() { return magField; }
+
 //overload operator +
+Magnetic_Field operator+(const Magnetic_Field& rhs) const {
+  Magnetic_Field out(value[0] + rhs.value[0], value[1] + rhs.value[1], value[2] + rhs.value[2]);
+  return out;
+}
+
 // overload operator <<
+friend std::ostream& operator<<(std::ostream& os, const Magnetic_Field& b) {
+  os << "B = (" << b.value[0] << ", " << b.value[1] << ", " << b.value[2] << "), |B|=" << std::sqrt(b.value[0]*b.value[0] + 
+  b.value[1]*b.value[1] + b.value[2]*b.value[2]) << ", B_calc=" << b.b_calc;
+  return os;
+    }
+};
+
 // destructor
 return 0;
 };
+#endif
