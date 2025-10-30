@@ -16,29 +16,29 @@ int main() {
 
     // Compute class-specific const's
     double Q  = 2.5e-6;
-    double r = 0.15;
+    double rE = 0.15;
     E1.compute_gauss(Q, r);
-    std::printf("Computed E (Gauss) at r = %.3f m, Q = %.3e C: %.6e (N/C)\n",
-                r, Q, E1.get_eField());
+    std::printf("Electrical Field at r = %.3f m, Q = %.3e C: %.6e (N/C)\n",
+                rE, Q, E1.get_eField());
 
-    double I  = 7.2;     // Amps (example)
-    double rB = 0.08;    // meters from wire
-    B1.compute_from_ampere(I, rB);
-    std::printf("Computed B (Ampere) at r=%.3f m, I=%.3e A: %.6e (T)\n",
-                rB, I, B1.get_computed_B());
+    double I  = 7.2; 
+    double rM = 0.08; 
+    B1.getAmp(I, rM);
+    std::printf("Magnetic Field at r = %.3f m, I = %.3e A: %.6e (T)\n",
+                rM, I, B1.get_magField());
 
-    // Demonstrate operator+ (component-wise) and copy/assignment working
+    // Operator+ usage
     Electric_Field E2(100.0, 200.0, 300.0);
     Electric_Field E3(1.0, 2.0, 3.0);
-    Electric_Field E_sum = E2 + E3;  // uses operator+
+    Electric_Field E_sum = E2 + E3; 
     std::cout << "E2 + E3 => " << E_sum << std::endl;
 
     Magnetic_Field B2(0.5, 0.5, 0.0);
     Magnetic_Field B3(0.1, 0.2, 0.3);
-    Magnetic_Field B_sum = B2 + B3;  // uses operator+
+    Magnetic_Field B_sum = B2 + B3; 
     std::cout << "B2 + B3 => " << B_sum << std::endl;
 
-    // Also show << on individual objects
+    // << usage
     std::cout << "E1: " << E1 << std::endl;
     std::cout << "B1: " << B1 << std::endl;
 
