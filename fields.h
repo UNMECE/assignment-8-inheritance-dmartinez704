@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 
+//**  === FIELD === */
 class Field {
 double *value;
 public:
@@ -40,6 +41,7 @@ void printMagnitude(const char* label){
 return 0;
 };
 
+//**  === ELECTRIC FIELD === */
 class Electric: public Field{
 // Gauss Law: E(r) = Q / (4.0 * pi * r^2 * epsilon0 ) 
 private:
@@ -75,6 +77,7 @@ friend std::ostream& operator<<(std::ostream& os, const Electric_Field& e) {
 return 0;
 };
 
+//**  === MAGNETIC FIELD === */
 class Magnetic: public Field{
 private:
 double magField;
