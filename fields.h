@@ -85,7 +85,7 @@ Magnetic_Field(double bx, double by, double bz) : Field(bx, by, bz), magField(0.
 
 //calculate magField()
 // Ampere's Law:  B = mu0 * I / (2*pi*r)
-void compute_from_ampere(double I, double r) {
+void get_ampere(double I, double r) {
   const double mu0 = 4.0e-7 * M_PI;
   if (r > 0.0) {
       magField = (mu0 * I) / (2.0 * M_PI * r);
