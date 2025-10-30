@@ -6,7 +6,7 @@
 #include <iostream>
 
 class Field {
-double* value;
+double *value;
 public:
 // defult constructor
 Field(){
